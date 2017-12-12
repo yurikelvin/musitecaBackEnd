@@ -19,6 +19,8 @@ public class Usuario {
     @Column
     private String senha;
     @Column
+    private String email;
+    @Column
     @Enumerated
     private Role role;
 
@@ -104,5 +106,9 @@ public class Usuario {
     public int hashCode() {
 
         return Objects.hash(login);
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
