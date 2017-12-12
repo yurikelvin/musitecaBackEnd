@@ -14,10 +14,6 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuario cadastrar(Usuario usuario) {
-        Usuario newUser = new Usuario();
-        newUser.setNome("teste");
-        usuarioRepository.save(newUser);
-        System.out.println(usuarioRepository.findOne("teste").getNome());
        return usuarioRepository.save(usuario);
     }
 
@@ -28,4 +24,5 @@ public class UsuarioService {
     public Collection<Usuario> buscaUsuarios() {
         return usuarioRepository.findAll();
     }
+
 }
