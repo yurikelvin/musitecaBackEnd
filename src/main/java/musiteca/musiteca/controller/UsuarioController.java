@@ -1,20 +1,17 @@
 package musiteca.musiteca.controller;
 
-import musiteca.musiteca.model.Usuario;
+import musiteca.musiteca.model.*;
 import musiteca.musiteca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 public class UsuarioController implements CrudController<Usuario>{
 
     @Autowired
@@ -23,27 +20,76 @@ public class UsuarioController implements CrudController<Usuario>{
     @Override
     @RequestMapping(method= RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) {
-        return new ResponseEntity<>(usuarioService.cadastrar(usuario), HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<Usuario> get(String id, Usuario usuario) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<Usuario> modificar(Usuario usuario) {
-        return null;
+        return new ResponseEntity<>(usuarioService.create(usuario), HttpStatus.CREATED);
     }
 
     @Override
     @RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<Usuario>> getAll() {
-        return new ResponseEntity<>(usuarioService.buscaUsuarios(), HttpStatus.OK);
+        return new ResponseEntity<>(usuarioService.getAll(), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Void> deletar(String t) {
-        return null;
+    @RequestMapping(method=RequestMethod.DELETE)
+    public ResponseEntity<Void> deletarTodos() {
+        usuarioService.removeAll();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @Override
+    @RequestMapping(value="/{name}" ,method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Usuario> get(@PathVariable String name) {
+        Usuario usuarioAchado = usuarioService.getByName(name);
+        HttpStatus resp = HttpStatus.OK;
+        if(usuarioAchado == null) {
+            resp = HttpStatus.NOT_FOUND;
+        }
+
+        return new ResponseEntity<>(usuarioAchado, resp);
+    }
+
+    @Override
+    @RequestMapping(value="/{name}" ,method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Usuario> modificar(@PathVariable String name, Usuario usuario) {
+        Usuario usuarioAtualizado = usuarioService.update(usuario);
+        HttpStatus resp = HttpStatus.OK;
+        if(usuarioAtualizado == null) {
+            resp = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<>(usuarioAtualizado, resp);
+    }
+
+
+    @Override
+    @RequestMapping(value="/{name}" ,method=RequestMethod.DELETE)
+    public ResponseEntity<Void> deletar(@PathVariable String name) {
+        usuarioService.removeByName(name);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value="{name}/artistas",method=RequestMethod.GET)
+    public ResponseEntity<Collection<Artista>> getArtistas(@PathVariable String name) {
+        return new ResponseEntity<>(usuarioService.getArtistas(name), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="{name}/favoritos",method=RequestMethod.GET)
+    public ResponseEntity<Collection<Artista>> getFavoritos(@PathVariable String name) {
+        return new ResponseEntity<>(usuarioService.getFavoritos(name), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="{name}/playlists",method=RequestMethod.GET)
+    public ResponseEntity<Collection<Playlist>> getPlaylists(@PathVariable String name) {
+        return new ResponseEntity<>(usuarioService.getPlaylists(name), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="{name}/albuns",method=RequestMethod.GET)
+    public ResponseEntity<Collection<Album>> getAlbuns(@PathVariable String name) {
+        return new ResponseEntity<>(usuarioService.getAlbuns(name), HttpStatus.OK);
+    }
+
+    @RequestMapping(value="{name}/musicas",method=RequestMethod.GET)
+    public ResponseEntity<Collection<Musica>> getMusicas(@PathVariable String name) {
+        return new ResponseEntity<>(usuarioService.getMusicas(name), HttpStatus.OK);
+    }
+
 }

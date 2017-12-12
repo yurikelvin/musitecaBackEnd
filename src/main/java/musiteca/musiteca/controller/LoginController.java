@@ -28,7 +28,7 @@ public class LoginController {
             throw new ServletException("Nome e senha precisam ser obrigatórios.");
         }
 
-        Usuario usuAutenticado = usuarioService.buscarPorNome(usuario.getNome());
+        Usuario usuAutenticado = usuarioService.getByName(usuario.getNome());
 
         if(usuAutenticado == null || !usuario.getSenha().equals(usuAutenticado.getSenha())) {
             throw new ServletException("Usuário ou senha inválido.");
