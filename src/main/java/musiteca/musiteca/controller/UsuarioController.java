@@ -24,20 +24,20 @@ public class UsuarioController implements CrudController<Usuario>{
     }
 
     @Override
-    @RequestMapping(method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/&/", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<Usuario>> getAll() {
         return new ResponseEntity<>(usuarioService.getAll(), HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(method=RequestMethod.DELETE)
+    @RequestMapping(value="/&/", method=RequestMethod.DELETE)
     public ResponseEntity<Void> deletarTodos() {
         usuarioService.removeAll();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(value="/{name}" ,method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/&/{name}" ,method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> get(@PathVariable String name) {
         Usuario usuarioAchado = usuarioService.getByName(name);
         HttpStatus resp = HttpStatus.OK;
@@ -49,7 +49,7 @@ public class UsuarioController implements CrudController<Usuario>{
     }
 
     @Override
-    @RequestMapping(value="/{name}" ,method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/&/{name}" ,method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> modificar(@PathVariable String name, Usuario usuario) {
         Usuario usuarioAtualizado = usuarioService.update(usuario);
         HttpStatus resp = HttpStatus.OK;
@@ -61,33 +61,33 @@ public class UsuarioController implements CrudController<Usuario>{
 
 
     @Override
-    @RequestMapping(value="/{name}" ,method=RequestMethod.DELETE)
+    @RequestMapping(value="/&/{name}" ,method=RequestMethod.DELETE)
     public ResponseEntity<Void> deletar(@PathVariable String name) {
         usuarioService.removeByName(name);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value="{name}/artistas",method=RequestMethod.GET)
+    @RequestMapping(value="/&/{name}/artistas",method=RequestMethod.GET)
     public ResponseEntity<Collection<Artista>> getArtistas(@PathVariable String name) {
         return new ResponseEntity<>(usuarioService.getArtistas(name), HttpStatus.OK);
     }
 
-    @RequestMapping(value="{name}/favoritos",method=RequestMethod.GET)
+    @RequestMapping(value="/&/{name}/favoritos",method=RequestMethod.GET)
     public ResponseEntity<Collection<Artista>> getFavoritos(@PathVariable String name) {
         return new ResponseEntity<>(usuarioService.getFavoritos(name), HttpStatus.OK);
     }
 
-    @RequestMapping(value="{name}/playlists",method=RequestMethod.GET)
+    @RequestMapping(value="/&/{name}/playlists",method=RequestMethod.GET)
     public ResponseEntity<Collection<Playlist>> getPlaylists(@PathVariable String name) {
         return new ResponseEntity<>(usuarioService.getPlaylists(name), HttpStatus.OK);
     }
 
-    @RequestMapping(value="{name}/albuns",method=RequestMethod.GET)
+    @RequestMapping(value="/&/{name}/albuns",method=RequestMethod.GET)
     public ResponseEntity<Collection<Album>> getAlbuns(@PathVariable String name) {
         return new ResponseEntity<>(usuarioService.getAlbuns(name), HttpStatus.OK);
     }
 
-    @RequestMapping(value="{name}/musicas",method=RequestMethod.GET)
+    @RequestMapping(value="/&/{name}/musicas",method=RequestMethod.GET)
     public ResponseEntity<Collection<Musica>> getMusicas(@PathVariable String name) {
         return new ResponseEntity<>(usuarioService.getMusicas(name), HttpStatus.OK);
     }
