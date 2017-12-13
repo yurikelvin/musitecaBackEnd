@@ -24,13 +24,13 @@ public class UsuarioController implements CrudController<Usuario>{
     }
 
     @Override
-    @RequestMapping(value="/u", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/u/", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<Usuario>> getAll() {
         return new ResponseEntity<>(usuarioService.getAll(), HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(value="/u", method=RequestMethod.DELETE)
+    @RequestMapping(value="/u/", method=RequestMethod.DELETE)
     public ResponseEntity<Void> deletarTodos() {
         usuarioService.removeAll();
         return new ResponseEntity<>(HttpStatus.OK);
@@ -39,18 +39,22 @@ public class UsuarioController implements CrudController<Usuario>{
     @Override
     @RequestMapping(value="/u/{name}" ,method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> get(@PathVariable String name) {
+
         Usuario usuarioAchado = usuarioService.getByName(name);
+
         HttpStatus resp = HttpStatus.OK;
         if(usuarioAchado == null) {
             resp = HttpStatus.NOT_FOUND;
         }
+
+
 
         return new ResponseEntity<>(usuarioAchado, resp);
     }
 
     @Override
     @RequestMapping(value="/u/{name}" ,method=RequestMethod.PUT, produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Usuario> modificar(@PathVariable String name, Usuario usuario) {
+    public ResponseEntity<Usuario> modificar(@PathVariable String name, @RequestBody Usuario usuario) {
         Usuario usuarioAtualizado = usuarioService.update(usuario);
         HttpStatus resp = HttpStatus.OK;
         if(usuarioAtualizado == null) {

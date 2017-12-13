@@ -1,5 +1,6 @@
 package musiteca.musiteca.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import musiteca.musiteca.model.enums.Role;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
 
     @Id

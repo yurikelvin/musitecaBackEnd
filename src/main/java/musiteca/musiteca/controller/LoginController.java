@@ -24,11 +24,12 @@ public class LoginController {
     @RequestMapping(value="/autenticar", consumes= MediaType.APPLICATION_JSON_VALUE, method= RequestMethod.POST)
     public LoginResponse autenticar(@RequestBody Usuario usuario) throws ServletException {
 
-        if(usuario.getNome() == null || usuario.getSenha() == null) {
+        if(usuario.getLogin() == null || usuario.getSenha() == null) {
             throw new ServletException("Nome e senha precisam ser obrigatórios.");
         }
 
         Usuario usuAutenticado = usuarioService.getByName(usuario.getLogin());
+
 
         if(usuAutenticado == null || !usuario.getSenha().equals(usuAutenticado.getSenha())) {
             throw new ServletException("Usuário ou senha inválido.");
@@ -37,7 +38,7 @@ public class LoginController {
         String token = Jwts.builder()
                 .setSubject(usuario.getNome())
                 .signWith(SignatureAlgorithm.HS512,"banana")
-                .setExpiration(new Date(System.currentTimeMillis() + 3 * HORAS))
+                .setExpiration(new Date(System.currentTimeMillis() + 24 * HORAS))
                 .compact();
 
         return new LoginResponse(token);
