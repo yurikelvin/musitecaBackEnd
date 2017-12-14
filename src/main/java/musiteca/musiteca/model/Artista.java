@@ -19,7 +19,9 @@ public class Artista {
     private boolean favorito;
     @Column
     private boolean selecionado;
-    @OneToMany(cascade= CascadeType.ALL)
+    @Column
+    private Integer rate;
+    @ManyToMany(cascade= CascadeType.ALL)
     private Set<Album> albuns;
 
     public Artista() {
@@ -74,17 +76,31 @@ public class Artista {
         this.albuns = albuns;
     }
 
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artista artista = (Artista) o;
-        return Objects.equals(nome, artista.nome);
+        return favorito == artista.favorito &&
+                selecionado == artista.selecionado &&
+                Objects.equals(nome, artista.nome) &&
+                Objects.equals(imagem, artista.imagem) &&
+                Objects.equals(ultimaOuvida, artista.ultimaOuvida) &&
+                Objects.equals(rate, artista.rate) &&
+                Objects.equals(albuns, artista.albuns);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(nome);
+        return Objects.hash(nome, imagem, ultimaOuvida, favorito, selecionado, rate, albuns);
     }
 }

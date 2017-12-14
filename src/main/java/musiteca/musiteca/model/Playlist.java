@@ -1,9 +1,6 @@
 package musiteca.musiteca.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +8,7 @@ import java.util.Set;
 public class Playlist {
 
     @Id
-    @Column
+    @Column(unique = true)
     private String nome;
     @Column
     private String imagem;
@@ -19,7 +16,7 @@ public class Playlist {
     private String descricao;
     @Column
     private String data;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.REFRESH)
     private Set<Musica> musicas;
 
     public Playlist() {

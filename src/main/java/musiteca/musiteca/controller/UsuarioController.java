@@ -1,6 +1,7 @@
 package musiteca.musiteca.controller;
 
 import musiteca.musiteca.model.*;
+import musiteca.musiteca.repository.PlaylistRepository;
 import musiteca.musiteca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -16,10 +18,13 @@ public class UsuarioController implements CrudController<Usuario>{
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PlaylistRepository playlistRepository;
 
     @Override
     @RequestMapping(method= RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> cadastrar(@RequestBody Usuario usuario) {
+         usuario.setPlaylists((Set<Playlist>) playlistRepository.save(usuario.getPlaylists()));
         return new ResponseEntity<>(usuarioService.create(usuario), HttpStatus.CREATED);
     }
 
@@ -74,11 +79,6 @@ public class UsuarioController implements CrudController<Usuario>{
     @RequestMapping(value="/u/{name}/artistas",method=RequestMethod.GET)
     public ResponseEntity<Collection<Artista>> getArtistas(@PathVariable String name) {
         return new ResponseEntity<>(usuarioService.getArtistas(name), HttpStatus.OK);
-    }
-
-    @RequestMapping(value="/u/{name}/favoritos",method=RequestMethod.GET)
-    public ResponseEntity<Collection<Artista>> getFavoritos(@PathVariable String name) {
-        return new ResponseEntity<>(usuarioService.getFavoritos(name), HttpStatus.OK);
     }
 
     @RequestMapping(value="/u/{name}/playlists",method=RequestMethod.GET)

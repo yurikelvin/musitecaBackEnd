@@ -56,11 +56,6 @@ public class UsuarioService implements CrudService<Usuario>{
         return usuarioProcurado.getArtistas();
     }
 
-    public Collection<Artista> getFavoritos(String name) {
-        Usuario usuarioProcurado = usuarioRepository.getOne(name);
-        return usuarioProcurado.getFavoritos();
-    }
-
     public Collection<Playlist> getPlaylists(String name) {
         Usuario usuarioProcurado = usuarioRepository.getOne(name);
         return usuarioProcurado.getPlaylists();

@@ -17,7 +17,7 @@ public class Album {
     private String ano;
     @Column
     private String artistaNome;
-    @OneToMany(cascade= CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Musica> musicas;
 
     public Album() {
