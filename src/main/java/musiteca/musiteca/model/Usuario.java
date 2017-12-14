@@ -25,6 +25,8 @@ public class Usuario {
     @Column
     @Enumerated
     private Role role;
+    @Column
+    private Integer rate;
 
     @OneToMany(cascade= CascadeType.ALL)
     private Set<Artista> artistas;
@@ -112,5 +114,13 @@ public class Usuario {
 
     public String getEmail() {
         return email;
+    }
+
+    public Integer getRate() {
+        return rate;
+    }
+
+    public void setRate(Integer rate) {
+        this.rate = rate;
     }
 }

@@ -20,11 +20,7 @@ public class UsuarioService implements CrudService<Usuario>{
 
     @Override
     public Usuario update(Usuario usuario) {
-        Usuario usuarioAtualizado = null;
-        if(usuarioRepository.exists(usuario.getNome())) {
-            usuarioAtualizado = usuarioRepository.save(usuario);
-        }
-        return usuarioAtualizado;
+        return usuarioRepository.save(usuario);
     }
 
     @Override

@@ -23,8 +23,6 @@ public class Artista {
     private Set<Album> albuns;
 
     public Artista() {
-        this.selecionado = false;
-        this.favorito = false;
         this.albuns = new HashSet<Album>();
     }
 
