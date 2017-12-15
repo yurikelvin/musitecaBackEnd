@@ -9,6 +9,11 @@ import java.util.Set;
 public class Artista {
 
     @Id
+    @GeneratedValue
+    private Integer id;
+
+    @Column
+    private String usuario;
     @Column
     private String nome;
     @Column
@@ -19,11 +24,9 @@ public class Artista {
     private boolean favorito;
     @Column
     private boolean selecionado;
-    @OneToMany(cascade= CascadeType.ALL)
-    private Set<Album> albuns;
 
     public Artista() {
-        this.albuns = new HashSet<Album>();
+
     }
 
     public String getNome() {
@@ -66,13 +69,6 @@ public class Artista {
         this.selecionado = selecionado;
     }
 
-    public Set<Album> getAlbuns() {
-        return albuns;
-    }
-
-    public void setAlbuns(Set<Album> albuns) {
-        this.albuns = albuns;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -86,5 +82,13 @@ public class Artista {
     public int hashCode() {
 
         return Objects.hash(nome);
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }

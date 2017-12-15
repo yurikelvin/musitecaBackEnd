@@ -2,6 +2,7 @@ package musiteca.musiteca.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
@@ -9,6 +10,11 @@ import java.util.Objects;
 public class Musica {
 
     @Id
+    @GeneratedValue
+    private String id;
+
+    @Column
+    private String usuario;
     @Column
     private String albumNome;
     @Column
@@ -72,5 +78,13 @@ public class Musica {
     public int hashCode() {
 
         return Objects.hash(albumNome);
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }

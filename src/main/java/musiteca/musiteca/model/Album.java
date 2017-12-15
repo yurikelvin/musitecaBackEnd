@@ -10,6 +10,11 @@ import java.util.Set;
 public class Album {
 
     @Id
+    @GeneratedValue
+    private Integer id;
+
+    private String usuario;
+    @Column
     private String nome;
     @Column
     private String imagem;
@@ -17,11 +22,10 @@ public class Album {
     private String ano;
     @Column
     private String artistaNome;
-    @OneToMany(cascade= CascadeType.ALL)
-    private Set<Musica> musicas;
+
 
     public Album() {
-        this.musicas = new HashSet<Musica>();
+
     }
 
 
@@ -57,13 +61,11 @@ public class Album {
         this.artistaNome = artistaNome;
     }
 
-    public Set<Musica> getMusicas() {
-        return musicas;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setMusicas(Set<Musica> musicas) {
-        this.musicas = musicas;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
-
-
 }

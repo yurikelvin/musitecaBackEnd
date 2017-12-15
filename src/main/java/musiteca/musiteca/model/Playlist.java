@@ -1,9 +1,6 @@
 package musiteca.musiteca.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +8,11 @@ import java.util.Set;
 public class Playlist {
 
     @Id
+    @GeneratedValue
+    private Integer id;
+
+    @Column
+    private String usuario;
     @Column
     private String nome;
     @Column
@@ -64,5 +66,13 @@ public class Playlist {
 
     public void setMusicas(Set<Musica> musicas) {
         this.musicas = musicas;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }

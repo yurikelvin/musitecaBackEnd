@@ -28,17 +28,7 @@ public class Usuario {
     @Column
     private Integer rate;
 
-    @OneToMany(cascade= CascadeType.ALL)
-    private Set<Artista> artistas;
-    @OneToMany(cascade= CascadeType.ALL)
-    private Set<Playlist> playlists;
-    @OneToMany
-    private Set<Artista> favoritos;
-
     public Usuario() {
-        this.artistas = new HashSet<Artista>();
-        this.playlists = new HashSet<Playlist>();
-        this.favoritos = new HashSet<Artista>();
         this.role = Role.USER;
     }
 
@@ -54,32 +44,8 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Set<Artista> getArtistas() {
-        return artistas;
-    }
-
-    public void setArtistas(Set<Artista> artistas) {
-        this.artistas = artistas;
-    }
-
     public String getLogin() {
         return login;
-    }
-
-    public Set<Playlist> getPlaylists() {
-        return playlists;
-    }
-
-    public void setPlaylists(Set<Playlist> playlists) {
-        this.playlists = playlists;
-    }
-
-    public Set<Artista> getFavoritos() {
-        return favoritos;
-    }
-
-    public void setFavoritos(Set<Artista> favoritos) {
-        this.favoritos = favoritos;
     }
 
     public Role getRole() {

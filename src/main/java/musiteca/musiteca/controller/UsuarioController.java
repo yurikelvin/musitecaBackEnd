@@ -1,6 +1,7 @@
 package musiteca.musiteca.controller;
 
 import musiteca.musiteca.model.*;
+import musiteca.musiteca.repository.PlaylistRepository;
 import musiteca.musiteca.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,29 +72,29 @@ public class UsuarioController implements CrudController<Usuario>{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value="/u/{name}/artistas",method=RequestMethod.GET)
-    public ResponseEntity<Collection<Artista>> getArtistas(@PathVariable String name) {
-        return new ResponseEntity<>(usuarioService.getArtistas(name), HttpStatus.OK);
-    }
+//    @RequestMapping(value="/u/{name}/artistas",method=RequestMethod.GET)
+//    public ResponseEntity<Collection<Artista>> getArtistas(@PathVariable String name) {
+//        return new ResponseEntity<>(usuarioService.getArtistas(name), HttpStatus.OK);
+//    }
 
-    @RequestMapping(value="/u/{name}/favoritos",method=RequestMethod.GET)
-    public ResponseEntity<Collection<Artista>> getFavoritos(@PathVariable String name) {
-        return new ResponseEntity<>(usuarioService.getFavoritos(name), HttpStatus.OK);
-    }
-
-    @RequestMapping(value="/u/{name}/playlists",method=RequestMethod.GET)
-    public ResponseEntity<Collection<Playlist>> getPlaylists(@PathVariable String name) {
-        return new ResponseEntity<>(usuarioService.getPlaylists(name), HttpStatus.OK);
-    }
-
-    @RequestMapping(value="/u/{name}/albuns",method=RequestMethod.GET)
-    public ResponseEntity<Collection<Album>> getAlbuns(@PathVariable String name) {
-        return new ResponseEntity<>(usuarioService.getAlbuns(name), HttpStatus.OK);
-    }
-
-    @RequestMapping(value="/u/{name}/musicas",method=RequestMethod.GET)
-    public ResponseEntity<Collection<Musica>> getMusicas(@PathVariable String name) {
-        return new ResponseEntity<>(usuarioService.getMusicas(name), HttpStatus.OK);
-    }
+//    @RequestMapping(value="/u/{name}/favoritos",method=RequestMethod.GET)
+//    public ResponseEntity<Collection<Artista>> getFavoritos(@PathVariable String name) {
+//        return new ResponseEntity<>(usuarioService.getFavoritos(name), HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value="/u/{name}/playlists",method=RequestMethod.GET)
+//    public ResponseEntity<Collection<Playlist>> getPlaylists(@PathVariable String name) {
+//        return new ResponseEntity<>(usuarioService.getPlaylists(name), HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value="/u/{name}/albuns",method=RequestMethod.GET)
+//    public ResponseEntity<Collection<Album>> getAlbuns(@PathVariable String name) {
+//        return new ResponseEntity<>(usuarioService.getAlbuns(name), HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value="/u/{name}/musicas",method=RequestMethod.GET)
+//    public ResponseEntity<Collection<Musica>> getMusicas(@PathVariable String name) {
+//        return new ResponseEntity<>(usuarioService.getMusicas(name), HttpStatus.OK);
+//    }
 
 }

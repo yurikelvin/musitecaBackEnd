@@ -10,10 +10,6 @@ public interface CrudService<T> {
 
     Collection<T> getAll();
 
-    T getByName(String name);
-
-    void removeByName(String name);
-
     void removeAll();
 
 }
