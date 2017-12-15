@@ -1,18 +1,19 @@
 package musiteca.musiteca.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@IdClass(PlaylistId.class)
 public class Playlist {
 
     @Id
-    @GeneratedValue
-    private Integer id;
-
     @Column
     private String usuario;
+    @Id
     @Column
     private String nome;
     @Column
@@ -21,7 +22,7 @@ public class Playlist {
     private String descricao;
     @Column
     private String data;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Musica> musicas;
 
     public Playlist() {
@@ -74,5 +75,41 @@ public class Playlist {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+}
+
+class PlaylistId implements Serializable {
+    String usuario;
+    String nome;
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlaylistId that = (PlaylistId) o;
+        return Objects.equals(usuario, that.usuario) &&
+                Objects.equals(nome, that.nome);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(usuario, nome);
     }
 }

@@ -25,8 +25,6 @@ public class Usuario {
     @Column
     @Enumerated
     private Role role;
-    @Column
-    private Integer rate;
 
     public Usuario() {
         this.role = Role.USER;
@@ -82,11 +80,4 @@ public class Usuario {
         return email;
     }
 
-    public Integer getRate() {
-        return rate;
-    }
-
-    public void setRate(Integer rate) {
-        this.rate = rate;
-    }
 }

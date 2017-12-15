@@ -19,7 +19,8 @@ public class MusicaController {
 
     @RequestMapping(value="usuarios/u/{name}/musicas",method= RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<Musica>> getMusicas(@PathVariable String name) {
-        return new ResponseEntity<>(musicaService.getMusicasUsuario(name), HttpStatus.OK);
+        Collection<Musica> musicasCadastradas = musicaService.getMusicasUsuario(name);
+        return new ResponseEntity<>(musicasCadastradas, HttpStatus.OK);
     }
 
     @RequestMapping(value="usuarios/u/{name}/musicas", method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

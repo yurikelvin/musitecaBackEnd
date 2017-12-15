@@ -2,31 +2,28 @@ package musiteca.musiteca.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@IdClass(AlbumId.class)
 public class Album {
 
     @Id
-    @GeneratedValue
-    private Integer id;
-
+    @Column
     private String usuario;
+    @Id
     @Column
     private String nome;
     @Column
     private String imagem;
     @Column
     private String ano;
+    @Id
     @Column
     private String artistaNome;
-
-
-    public Album() {
-
-    }
 
 
     public String getNome() {
@@ -67,5 +64,28 @@ public class Album {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+}
+
+
+class AlbumId implements Serializable{
+    String usuario;
+    String artistaNome;
+    String nome;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AlbumId albumId = (AlbumId) o;
+        return Objects.equals(usuario, albumId.usuario) &&
+                Objects.equals(artistaNome, albumId.artistaNome) &&
+                Objects.equals(nome, albumId.nome);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(usuario, artistaNome, nome);
     }
 }
