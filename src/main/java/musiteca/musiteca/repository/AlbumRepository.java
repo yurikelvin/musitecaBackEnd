@@ -18,4 +18,7 @@ public interface AlbumRepository extends JpaRepository<Album, String>{
 
     @Query(value="Select a from Album a where a.usuario=:pnome AND a.artistaNome=:partist")
     List<Album> getAlbunsArtista(@Param("pnome") String usuario, @Param("partist") String artista);
+
+    @Query(value="Select a from Album a where a.usuario=:pnome AND a.artistaNome=:partist AND a.nome=:palbum")
+    Album getAlbumUsuario(@Param("pnome") String usuario, @Param("partist") String artista, @Param("palbum") String album);
 }

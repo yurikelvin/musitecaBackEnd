@@ -21,6 +21,16 @@ public class PlaylistController {
         return new ResponseEntity<>(playlistService.getPlaylistsUsuario(name), HttpStatus.OK);
     }
 
+    @RequestMapping(value="usuarios/u/{name}/playlists/e",method= RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> hasPlaylist(@PathVariable String name, @RequestBody Playlist playlist) {
+        HttpStatus resp = HttpStatus.OK;
+        if(playlistService.contemPlaylist(name, playlist.getNome())) {
+            resp = HttpStatus.NOT_ACCEPTABLE;
+        }
+        return new ResponseEntity<>(resp);
+    }
+
+
     @RequestMapping(value="usuarios/u/{name}/playlists",method= RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Playlist> cadastraPlaylist(@PathVariable String name, @RequestBody Playlist playlist) {
         playlist.setUsuario(name);

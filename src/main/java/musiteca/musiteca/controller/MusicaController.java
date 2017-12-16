@@ -23,6 +23,16 @@ public class MusicaController {
         return new ResponseEntity<>(musicasCadastradas, HttpStatus.OK);
     }
 
+    @RequestMapping(value="usuarios/u/{name}/musicas/e", method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> hasMusica(@PathVariable String name, @RequestBody Musica musica) {
+        HttpStatus resp = HttpStatus.OK;
+        if(musicaService.contemMusica(name, musica.getNomeArtist(), musica.getAlbumNome(), musica.getNome())) {
+            resp = HttpStatus.NOT_ACCEPTABLE;
+        }
+        return new ResponseEntity<>(resp);
+    }
+
+
     @RequestMapping(value="usuarios/u/{name}/musicas", method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Musica> cadastraMusica(@PathVariable String name, @RequestBody Musica musica) {
         musica.setUsuario(name);

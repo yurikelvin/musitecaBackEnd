@@ -21,4 +21,7 @@ public interface MusicaRepository extends JpaRepository<Musica, String>{
     @Query(value="Select a from Musica a where a.usuario=:pnome AND a.nomeArtist=:partist AND a.albumNome=:palbum")
     List<Musica> getMusicasAlbum(@Param("pnome") String usuario, @Param("partist") String artista, @Param("palbum") String album);
 
+    @Query(value="Select a from Musica a where a.usuario=:pnome AND a.nomeArtist=:partist AND a.albumNome=:palbum AND a.nome=:pmusic")
+    Musica getMusicaAlbum(@Param("pnome") String usuario, @Param("partist") String artista, @Param("palbum") String album, @Param("pmusic") String musica);
+
 }

@@ -40,4 +40,8 @@ public class AlbumService implements CrudService<Album>{
     public Collection<Album> getAlbunsArtista(String usuario, String artista) {
         return albumRepository.getAlbunsArtista(usuario, artista);
     }
+
+    public boolean contemAlbum(String usuario, String artista, String album) {
+        return albumRepository.getAlbumUsuario(usuario, artista, album) != null;
+    }
 }

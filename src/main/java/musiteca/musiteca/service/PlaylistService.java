@@ -38,5 +38,7 @@ public class PlaylistService implements CrudService<Playlist>{
         return playlistRepository.getPlaylistsUsuario(usuario);
     }
 
-    // Ver como vai ficar a questão de musicas playlist
+    public boolean contemPlaylist(String usuario, String playlist) {
+        return playlistRepository.getPlaylistUsuario(usuario, playlist) != null;
+    }
 }

@@ -22,6 +22,15 @@ public class ArtistaController {
         return new ResponseEntity<>(artistaService.getArtistasUsuario(name) ,HttpStatus.OK);
     }
 
+    @RequestMapping(value="usuarios/u/{name}/artistas/e",method= RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> getArtista(@PathVariable String name, @RequestBody Artista artista) {
+        HttpStatus resp = HttpStatus.OK;
+        if(artistaService.contemArtista(name, artista.getNome())) {
+            resp = HttpStatus.NOT_ACCEPTABLE;
+        }
+        return new ResponseEntity<>(resp);
+    }
+
     @RequestMapping(value="usuarios/u/{name}/artistas",method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Artista> cadastraArtista(@PathVariable String name, @RequestBody Artista artista) {
         artista.setUsuario(name);

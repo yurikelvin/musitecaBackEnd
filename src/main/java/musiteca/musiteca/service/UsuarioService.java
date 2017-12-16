@@ -49,4 +49,7 @@ public class UsuarioService implements CrudService<Usuario>{
         }
     }
 
+    public boolean contemUsuario(String usuario) {
+        return usuarioRepository.exists(usuario);
+    }
 }

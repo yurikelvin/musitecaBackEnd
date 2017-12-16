@@ -72,29 +72,14 @@ public class UsuarioController implements CrudController<Usuario>{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @RequestMapping(value="/u/{name}/artistas",method=RequestMethod.GET)
-//    public ResponseEntity<Collection<Artista>> getArtistas(@PathVariable String name) {
-//        return new ResponseEntity<>(usuarioService.getArtistas(name), HttpStatus.OK);
-//    }
+    @RequestMapping(value="/e", method= RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> hasUsuario(@RequestBody Usuario usuario) {
+        HttpStatus resp = HttpStatus.OK;
+        if(usuarioService.contemUsuario(usuario.getNome())) {
+            resp = HttpStatus.NOT_ACCEPTABLE;
+        }
+        return new ResponseEntity<>(resp);
+    }
 
-//    @RequestMapping(value="/u/{name}/favoritos",method=RequestMethod.GET)
-//    public ResponseEntity<Collection<Artista>> getFavoritos(@PathVariable String name) {
-//        return new ResponseEntity<>(usuarioService.getFavoritos(name), HttpStatus.OK);
-//    }
-//
-//    @RequestMapping(value="/u/{name}/playlists",method=RequestMethod.GET)
-//    public ResponseEntity<Collection<Playlist>> getPlaylists(@PathVariable String name) {
-//        return new ResponseEntity<>(usuarioService.getPlaylists(name), HttpStatus.OK);
-//    }
-//
-//    @RequestMapping(value="/u/{name}/albuns",method=RequestMethod.GET)
-//    public ResponseEntity<Collection<Album>> getAlbuns(@PathVariable String name) {
-//        return new ResponseEntity<>(usuarioService.getAlbuns(name), HttpStatus.OK);
-//    }
-//
-//    @RequestMapping(value="/u/{name}/musicas",method=RequestMethod.GET)
-//    public ResponseEntity<Collection<Musica>> getMusicas(@PathVariable String name) {
-//        return new ResponseEntity<>(usuarioService.getMusicas(name), HttpStatus.OK);
-//    }
 
 }

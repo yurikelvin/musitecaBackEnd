@@ -30,6 +30,14 @@ public class Usuario {
         this.role = Role.USER;
     }
 
+    public Usuario(String login, String nome, String senha, String email) {
+        this();
+        this.login = login;
+        this.nome = nome;
+        this.senha = senha;
+        this.email = email;
+    }
+
     public String getNome() {
         return nome;
     }

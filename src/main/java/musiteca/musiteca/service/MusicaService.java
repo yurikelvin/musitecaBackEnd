@@ -44,4 +44,8 @@ public class MusicaService implements CrudService<Musica>{
     public Collection<Musica> getMusicasArtista(String usuario, String artista) {
         return musicaRepository.getMusicasArtista(usuario, artista);
     }
+
+    public boolean contemMusica(String usuario, String artista, String album, String musica) {
+        return musicaRepository.getMusicaAlbum(usuario, artista, album, musica) != null;
+    }
 }

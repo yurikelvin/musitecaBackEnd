@@ -14,4 +14,7 @@ public interface PlaylistRepository extends JpaRepository<Playlist, String>{
 
     @Query(value="Select a from Playlist a where a.usuario=:pnome")
     Collection<Playlist> getPlaylistsUsuario(@Param("pnome") String usuario);
+
+    @Query(value="Select a from Playlist a where a.usuario=:pnome AND a.nome=:playlist")
+    Playlist getPlaylistUsuario(@Param("pnome") String usuario, @Param("playlist") String playlist);
 }

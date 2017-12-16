@@ -22,6 +22,15 @@ public class AlbumController {
         return new ResponseEntity<>(albunsCadastrados, HttpStatus.OK);
     }
 
+    @RequestMapping(value="usuarios/u/{name}/albuns/e",method= RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE, consumes= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> hasAlbum(@PathVariable String name, @RequestBody Album album) {
+        HttpStatus resp = HttpStatus.OK;
+        if(albumService.contemAlbum(name, album.getArtistaNome(), album.getNome())) {
+            resp = HttpStatus.NOT_ACCEPTABLE;
+        }
+        return new ResponseEntity<>(resp);
+    }
+
     @RequestMapping(value="usuarios/u/{name}/albuns",method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Album> cadastraAlbum(@PathVariable String name, @RequestBody Album album) {
         album.setUsuario(name);
