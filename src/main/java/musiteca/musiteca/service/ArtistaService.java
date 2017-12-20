@@ -45,4 +45,17 @@ public class ArtistaService implements CrudService<Artista>{
     public boolean contemArtista(String usuario, String artista) {
         return artistaRepository.getArtistaUsuario(usuario,artista) != null;
     }
+
+    public void removeFavorito(String usuario, String artista) {
+        Artista artistaBuscado = artistaRepository.getArtistaUsuario(usuario, artista);
+        artistaBuscado.setFavorito(false);
+        artistaRepository.save(artistaBuscado);
+    }
+
+    public void adicionaFavorito(String usuario, String artista) {
+        Artista artistaBuscado = artistaRepository.getArtistaUsuario(usuario, artista);
+        artistaBuscado.setFavorito(true);
+        artistaRepository.save(artistaBuscado);
+    }
+
 }

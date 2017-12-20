@@ -23,8 +23,6 @@ public class Artista {
     @Column
     private boolean favorito;
     @Column
-    private boolean selecionado;
-    @Column
     private Integer rate;
 
     public Artista() {
@@ -74,14 +72,6 @@ public class Artista {
 
     public void setFavorito(boolean favorito) {
         this.favorito = favorito;
-    }
-
-    public boolean isSelecionado() {
-        return selecionado;
-    }
-
-    public void setSelecionado(boolean selecionado) {
-        this.selecionado = selecionado;
     }
 
 

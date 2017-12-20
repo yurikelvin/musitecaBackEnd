@@ -41,4 +41,9 @@ public class PlaylistService implements CrudService<Playlist>{
     public boolean contemPlaylist(String usuario, String playlist) {
         return playlistRepository.getPlaylistUsuario(usuario, playlist) != null;
     }
+
+    public void removePlaylist(String usuario, String playlist) {
+        Playlist playlistBuscada = playlistRepository.getPlaylistUsuario(usuario, playlist);
+        playlistRepository.delete(playlistBuscada);
+    }
 }

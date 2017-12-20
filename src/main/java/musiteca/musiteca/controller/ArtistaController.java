@@ -45,19 +45,19 @@ public class ArtistaController {
     }
 
     @RequestMapping(value="usuarios/u/{name}/favoritos",method=RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces= MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Artista> cadastraFavorito(@PathVariable String name, @RequestBody Artista artista) {
-        artista.setUsuario(name);
-        artista.setFavorito(true);
-        Artista artistaAtualizado = artistaService.update(artista);
-        return new ResponseEntity<>(artistaAtualizado, HttpStatus.CREATED);
+    public ResponseEntity<Void> cadastraFavorito(@PathVariable String name, @RequestBody Artista artista) {
+        artistaService.adicionaFavorito(name, artista.getNome());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value="usuarios/u/{name}/favoritos/{artista}",method=RequestMethod.DELETE, consumes= MediaType.APPLICATION_JSON_VALUE, produces= MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Artista> deletaFavorito(@PathVariable String name, @RequestBody Artista artista) {
-        artista.setUsuario(name);
-        artista.setFavorito(false);
-        Artista artistaAtualizado = artistaService.update(artista);
-        return new ResponseEntity<>(artistaAtualizado, HttpStatus.CREATED);
+    @RequestMapping(value="usuarios/u/{name}/favoritos/{artista}",method=RequestMethod.DELETE)
+    public ResponseEntity<Void> deletaFavorito(@PathVariable String name, @PathVariable String artista) {
+        HttpStatus resp = HttpStatus.NOT_FOUND;
+        if(artistaService.contemArtista(name, artista)) {
+            artistaService.removeFavorito(name, artista);
+            resp = HttpStatus.OK;
+        }
+        return new ResponseEntity<>(resp);
     }
 
 

@@ -38,5 +38,16 @@ public class PlaylistController {
         return new ResponseEntity<>(playlistCadastrada, HttpStatus.OK);
     }
 
+    @RequestMapping(value="usuarios/u/{name}/playlists/{nomeplaylist}",method= RequestMethod.DELETE)
+    public ResponseEntity<Void> deletaPlaylist(@PathVariable String name, @PathVariable String nomeplaylist) {
+        HttpStatus resp = HttpStatus.NOT_FOUND;
+
+        if(playlistService.contemPlaylist(name, nomeplaylist)) {
+            playlistService.removePlaylist(name, nomeplaylist);
+            resp = HttpStatus.OK;
+        }
+        return new ResponseEntity<>(resp);
+    }
+
 
 }
