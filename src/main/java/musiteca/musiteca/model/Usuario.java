@@ -13,13 +13,12 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
 
-    @Id
-    @Column
-    private String login;
+
     @Column
     private String nome;
     @Column
     private String senha;
+    @Id
     @Column
     private String email;
     @Column
@@ -30,9 +29,8 @@ public class Usuario {
         this.role = Role.USER;
     }
 
-    public Usuario(String login, String nome, String senha, String email) {
+    public Usuario(String nome, String senha, String email) {
         this();
-        this.login = login;
         this.nome = nome;
         this.senha = senha;
         this.email = email;
@@ -48,10 +46,6 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getLogin() {
-        return login;
     }
 
     public Role getRole() {
@@ -75,13 +69,13 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(login, usuario.login);
+        return Objects.equals(email, usuario.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(login);
+        return Objects.hash(email);
     }
 
     public String getEmail() {

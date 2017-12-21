@@ -75,7 +75,7 @@ public class UsuarioController implements CrudController<Usuario>{
     @RequestMapping(value="/e", method= RequestMethod.POST, consumes= MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> hasUsuario(@RequestBody Usuario usuario) {
         HttpStatus resp = HttpStatus.OK;
-        if(usuarioService.contemUsuario(usuario.getNome())) {
+        if(usuarioService.contemUsuario(usuario.getEmail())) {
             resp = HttpStatus.NOT_ACCEPTABLE;
         }
         return new ResponseEntity<>(resp);
