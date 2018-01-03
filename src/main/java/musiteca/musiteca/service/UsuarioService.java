@@ -5,6 +5,7 @@ import musiteca.musiteca.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
@@ -28,7 +29,6 @@ public class UsuarioService implements CrudService<Usuario>{
         return usuarioRepository.findAll();
     }
 
-    @Override
     public Usuario getByName(String name) {
         Usuario usuarioAchado = null;
         if(usuarioRepository.exists(name)) {
@@ -37,7 +37,6 @@ public class UsuarioService implements CrudService<Usuario>{
         return usuarioAchado;
     }
 
-    @Override
     public void removeByName(String name) {
         if(usuarioRepository.exists(name)) {
             usuarioRepository.delete(name);
@@ -51,52 +50,19 @@ public class UsuarioService implements CrudService<Usuario>{
         }
     }
 
-    public Collection<Artista> getArtistas(String name) {
-        Usuario usuarioProcurado = usuarioRepository.getOne(name);
-        return usuarioProcurado.getArtistas();
-    }
-
-    public Collection<Artista> getFavoritos(String name) {
-        Usuario usuarioProcurado = usuarioRepository.getOne(name);
-        return usuarioProcurado.getFavoritos();
-    }
-
-    public Collection<Playlist> getPlaylists(String name) {
-        Usuario usuarioProcurado = usuarioRepository.getOne(name);
-        return usuarioProcurado.getPlaylists();
-    }
-
-    public Collection<Album> getAlbuns(String name) {
-        Collection<Artista> artistasProcurados = this.getArtistas(name);
-
-        Collection<Album> albuns = new HashSet<Album>();
-        Iterator<Artista> iterator = artistasProcurados.iterator();
-        while(iterator.hasNext()) {
-            Artista artistaDaVez = iterator.next();
-            Iterator<Album> albumIterator = artistaDaVez.getAlbuns().iterator();
-            while(albumIterator.hasNext()) {
-                Album next = albumIterator.next();
-                albuns.add(next);
-            }
+    @Transactional
+    public boolean confereUsuario(String email, String senha) {
+        boolean confere = false;
+        Usuario usuarioProcurado = usuarioRepository.getOne(email);
+        if(usuarioProcurado != null && usuarioProcurado.getSenha().equals(senha)) {
+            confere = true;
         }
 
-        return albuns;
+        return confere;
+
     }
 
-    public Collection<Musica> getMusicas(String name) {
-        Collection<Album> albunsProcurados = this.getAlbuns(name);
-
-        Collection<Musica> musicas = new HashSet<Musica>();
-        Iterator<Album> albumIterator = albunsProcurados.iterator();
-        while(albumIterator.hasNext()) {
-            Album albumDaVez = albumIterator.next();
-            Iterator<Musica> musicaIterator = albumDaVez.getMusicas().iterator();
-            while(musicaIterator.hasNext()) {
-                Musica next = musicaIterator.next();
-                musicas.add(next);
-            }
-
-        }
-        return musicas;
+    public boolean contemUsuario(String usuario) {
+        return usuarioRepository.exists(usuario);
     }
 }

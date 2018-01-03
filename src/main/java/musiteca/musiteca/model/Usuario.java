@@ -13,33 +13,27 @@ import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario {
 
-    @Id
-    @Column
-    private String login;
+
     @Column
     private String nome;
     @Column
     private String senha;
+    @Id
     @Column
     private String email;
     @Column
     @Enumerated
     private Role role;
-    @Column
-    private Integer rate;
-
-    @OneToMany(cascade= CascadeType.ALL)
-    private Set<Artista> artistas;
-    @OneToMany(cascade= CascadeType.ALL)
-    private Set<Playlist> playlists;
-    @OneToMany
-    private Set<Artista> favoritos;
 
     public Usuario() {
-        this.artistas = new HashSet<Artista>();
-        this.playlists = new HashSet<Playlist>();
-        this.favoritos = new HashSet<Artista>();
         this.role = Role.USER;
+    }
+
+    public Usuario(String nome, String senha, String email) {
+        this();
+        this.nome = nome;
+        this.senha = senha;
+        this.email = email;
     }
 
     public String getNome() {
@@ -52,34 +46,6 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public Set<Artista> getArtistas() {
-        return artistas;
-    }
-
-    public void setArtistas(Set<Artista> artistas) {
-        this.artistas = artistas;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public Set<Playlist> getPlaylists() {
-        return playlists;
-    }
-
-    public void setPlaylists(Set<Playlist> playlists) {
-        this.playlists = playlists;
-    }
-
-    public Set<Artista> getFavoritos() {
-        return favoritos;
-    }
-
-    public void setFavoritos(Set<Artista> favoritos) {
-        this.favoritos = favoritos;
     }
 
     public Role getRole() {
@@ -103,24 +69,17 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(login, usuario.login);
+        return Objects.equals(email, usuario.email);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(login);
+        return Objects.hash(email);
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Integer getRate() {
-        return rate;
-    }
-
-    public void setRate(Integer rate) {
-        this.rate = rate;
-    }
 }

@@ -2,27 +2,28 @@ package musiteca.musiteca.model;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@IdClass(AlbumId.class)
 public class Album {
 
     @Id
+    @Column
+    private String usuario;
+    @Id
+    @Column
     private String nome;
     @Column
     private String imagem;
     @Column
     private String ano;
+    @Id
     @Column
     private String artistaNome;
-    @OneToMany(cascade= CascadeType.ALL)
-    private Set<Musica> musicas;
-
-    public Album() {
-        this.musicas = new HashSet<Musica>();
-    }
 
 
     public String getNome() {
@@ -57,13 +58,34 @@ public class Album {
         this.artistaNome = artistaNome;
     }
 
-    public Set<Musica> getMusicas() {
-        return musicas;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setMusicas(Set<Musica> musicas) {
-        this.musicas = musicas;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+}
+
+
+class AlbumId implements Serializable{
+    String usuario;
+    String artistaNome;
+    String nome;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AlbumId albumId = (AlbumId) o;
+        return Objects.equals(usuario, albumId.usuario) &&
+                Objects.equals(artistaNome, albumId.artistaNome) &&
+                Objects.equals(nome, albumId.nome);
     }
 
+    @Override
+    public int hashCode() {
 
+        return Objects.hash(usuario, artistaNome, nome);
+    }
 }
