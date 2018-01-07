@@ -6,4 +6,4 @@
 
 ## Authors
 
-* **Yuri Kelvin** - *Desenvolvimento*
+* **Yuri Silva** - *Desenvolvimento*
