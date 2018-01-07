@@ -11,7 +11,7 @@ angular.module("musiteca").controller("loginCtrl", function($rootScope, $uibModa
 
     $scope.logar = function(usuario) {
 
-        $http.post("http://localhost:8080/autenticar", angular.copy(usuario), {headers: {
+        $http.post("https://localhost:8080/autenticar", angular.copy(usuario), {headers: {
                 'Content-Type': 'application/json'
             }}).then(function(response) {
            localStorage.setItem("userToken", response.data.token);
