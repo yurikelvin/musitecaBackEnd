@@ -1,0 +1,189 @@
+        .jumbotron {
+            width: 600px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+            margin-bottom: auto;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .form-control {
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            margin-bottom: 30px;
+        }
+
+        .selecionado {
+            background-color: #48D1CC;
+            padding: 10px;
+            border: 8px solid white;
+            box-shadow: 1px 1px 4px black;
+        }
+
+        .negrito {
+            font-weight: bold;
+        }
+
+        .italic {
+             font-style: italic;
+        }
+
+        hr {
+            border-color: #999;
+        }
+
+        img#playImg {
+            height: 20%;
+            width: 20%;
+        }
+
+        figure.foto-legenda {
+            position: relative;
+              border: 8px solid white;
+              box-shadow: 1px 1px 4px black;
+
+        }
+
+        figure.foto-legenda img {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        figure.foto-legenda figcaption {
+            opacity: 0;
+            position: absolute;
+            top: 0px;
+            background-color: rgba(0,0,0, .4);
+            color:white;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            transition: opacity 1s;
+        }
+
+        figure.foto-legenda:hover figcaption {
+            opacity: 1;
+        }
+
+        div#rateArtist {
+            margin: -20px auto 0px 50px;
+            /* box-shadow: 0px 0px 10px rgba(0,0,0, .5); */
+            padding: 10px;
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+        input[type=checkbox] + label {
+            user-select: none;
+        }
+
+
+        div#cabecalho {
+            position: relative;
+              border: 8px solid white;
+              box-shadow: 1px 1px 4px black;
+
+        }
+
+        h5 {
+            font-size:24px;
+            display: inline;
+        }
+        h5 small {
+            font-size: 18px;
+            display: inline;
+        }
+
+        figure.foto-playlist {
+            position: relative;
+            border: 8px solid white;
+            box-shadow: 1px 1px 4px black;
+            text-align: left;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: auto;
+            margin-left: 40px;
+            margin-right: 300px;
+
+        }
+
+        figure.foto-playlist img {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        .circular--landscape {
+          display: inline-block;
+          position: relative;
+          width: 200px;
+          height: 200px;
+          overflow: hidden;
+          border-radius: 50%;
+          box-shadow: 1px 1px 4px black;
+        }
+
+        .circular--landscape img {
+          width: auto;
+          height: 100%;
+          margin-left: -50px;
+        }
+
+        .circular--square {
+          position: relative;
+          width: 200px;
+          height: 200px;
+          overflow: hidden;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .circular--square img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 25px;
+            margin-top: -12px;
+        }
+
+        .password-icon {
+            position: relative;
+            top: -23px;
+            left: 430px;
+            right: 25px;
+            margin-top: -12px;
+        }
+
+        .search-icon2 {
+            position: absolute;
+            top: 63%;
+            right: 25px;
+            margin-top: -12px;
+        }
+
+        .btn-playlist {
+          color: #fff;
+          border: 1px solid #fff;
+          background-color: transparent; }
+          .btn-playlist:focus, .btn-playlist:hover {
+            color: #fff;
+            outline: none;
+            background-color: #42DCA3;
+            }
+
